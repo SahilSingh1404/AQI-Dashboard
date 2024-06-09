@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup Form</title>
+    <link rel="stylesheet" href="./signup.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="images/logo.jpg" alt="Logo" class="logo">
+    </div>
+    <div class="wrapper">
+        <div class="title-text">
+            <div class="title login">User Login</div>
+            <div class="title signup">Signup Form</div>
+        </div>
+        <div class="form-container">
+            <div class="slide-controls">
+                <input type="radio" name="slide" id="login" checked>
+                <input type="radio" name="slide" id="signup">
+                <button class="slide login" onclick="showLogin()">Login</button>
+                <button class="slide signup" onclick="showSignup()">Signup</button>
+                <div class="slider-tab"></div>
+            </div>
+            <div class="form-inner">
+                <!-- login form -->
+                <form id="loginForm" class="login">
+                    <div class="field">
+                        <input type="text" name="email" placeholder="Username" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="pass-link"><a href="#">Forgot password?</a></div>
+                    <div class="field btn">
+                        <div class="btn-layer"></div>
+                        <input type="submit" value="Login">
+                    </div>
+                    <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+                </form>
+
+                <!-- signup form -->
+                <form id="signupForm" class="signup">
+                    <div class="field">
+                        <input type="text" name="email" placeholder="Username" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="Confirm password" required>
+                    </div>
+                    <div class="field btn">
+                        <div class="btn-layer"></div>
+                        <input type="submit" value="Signup">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>

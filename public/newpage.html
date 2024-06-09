@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devices</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            max-width: 600px;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        @media (max-width: 600px) {
+            table, th, td {
+                display: block;
+                width: 100%;
+            }
+
+            th, td {
+                box-sizing: border-box;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+            }
+
+            th {
+                background-color: #333;
+                color: #fff;
+            }
+
+            td::before {
+                content: attr(data-label);
+                flex: 1;
+                text-align: left;
+                font-weight: bold;
+            }
+
+            td {
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>AQI Dashboard</h1>
+    <div class="container">
+        <div class="image-box">
+            <img src="images/device1.png" alt="Image 1">
+            <div class="overlay">
+                <h2 class="heading">Device1</h2>
+                <button onclick="redirectToPage('device1')">Open Device</button>
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="images/device2.png" alt="Image 2">
+            <div class="overlay">
+                <h2 class="heading">Device2</h2>
+                <button onclick="redirectToPage('device2')">Open Device</button>
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="images/device3.png" alt="Image 3">
+            <div class="overlay">
+                <h2 class="heading">Device3</h2>
+                <button onclick="redirectToPage('device3')">Open Device</button>
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="images/device4.png" alt="Image 4">
+            <div class="overlay">
+                <h2 class="heading">Device4</h2>
+                <button onclick="redirectToPage('device4')">Open Device</button>
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="images/device5.png" alt="Image 5">
+            <div class="overlay">
+                <h2 class="heading">Device5</h2>
+                <button onclick="redirectToPage('device5')">Open Device</button>
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="images/device6.png" alt="Image 6">
+            <div class="overlay">
+                <h2 class="heading">Device6</h2>
+                <button onclick="redirectToPage('device6')">Open Device</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function redirectToPage(deviceId) {
+            const token = localStorage.getItem('token');
+            fetch(`/aqi/data/${deviceId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const parametersHtml = `
+                    <h1>${deviceId}</h1>
+                    <table>
+                        <tbody>
+                            <tr><th>PM2.5</th><td>${data.pm25}</td></tr>
+                            <tr><th>PM 10</th><td>${data.pm10}</td></tr>
+                            <tr><th>Temperature</th><td>${data.temperature}</td></tr>
+                            <tr><th>Humidity</th><td>${data.humidity}</td></tr>
+                            <tr><th>Pressure</th><td>${data.pressure}</td></tr>
+                            <tr><th>CO2 Equivalent</th><td>${data.co2}</td></tr>
+                            <tr><th>VOCs Equivalent</th><td>${data.voc}</td></tr>
+                            <tr><th>Gas Resistance</th><td>${data.gasResistance}</td></tr>
+                            <tr><th>IAQ</th><td>${data.iaq}</td></tr>
+                        </tbody>
+                    </table>
+                    <button onclick="goBack()">Back</button>`;
+                document.body.innerHTML = parametersHtml;
+            })
+            .catch(error => console.error('Error:', error));
+            }    
+            function goBack() {
+                window.location.href = 'newpage.html'; // Navigate back to the dashboard page
+            }
+    </script>
+</body>
+</html>
+
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        background-color: #4CAF50;
+        color: white;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 0;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 20px;
+    }
+
+    .image-box {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-box img {
+        width: 100%; /* Ensure image fills its container */
+        height: auto; /* Maintain aspect ratio */
+        display: block;
+        margin: 0 auto; /* Center the image horizontally */
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .image-box:hover .overlay {
+        opacity: 1;
+    }
+
+    .overlay h2 {
+        margin: 0;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .overlay button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        border: none;
+        background: #1a75ff;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .overlay button:hover {
+        background: #004080;
+    }
+
+    .heading {
+        text-align: center;
+    }
+
+    @media (max-width: 992px) {
+        .container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
