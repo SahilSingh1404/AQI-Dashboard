@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const authRoutes = require('./routes/auth');
-const aqiRoutes = require('./routes/aqi');
+const authRoutes = require('./auth');
+const aqiRoutes = require('./aqi');
 // const deviceRoutes = require('./routes/device'); // Add this line
 
 const app = express();
