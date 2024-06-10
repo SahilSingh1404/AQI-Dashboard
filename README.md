@@ -1,1 +1,1 @@
-[# AQI-Dashboard](https://airbuddigreen.onrender.com)
+(https://airbuddigreen.onrender.com)
